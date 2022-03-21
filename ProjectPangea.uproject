@@ -15,29 +15,12 @@
 	],
 	"Plugins": [
 		{
-			"Name": "MegascansPlugin",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win64",
-				"Mac",
-				"Linux"
-			]
-		},
-		{
 			"Name": "SunPosition",
 			"Enabled": true
 		},
 		{
 			"Name": "Landmass",
 			"Enabled": true
-		},
-		{
-			"Name": "Anima4DUnrealPlugin",
-			"Enabled": false
-		},
-		{
-			"Name": "UEAnimaLoader",
-			"Enabled": false
 		},
 		{
 			"Name": "Bridge",
