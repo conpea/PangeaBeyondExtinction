@@ -52,5 +52,11 @@
 			"Name": "ControlRig",
 			"Enabled": true
 		}
+	],
+	"TargetPlatforms": [
+		"Linux",
+		"LinuxArm64",
+		"Windows",
+		"IOS"
 	]
 }
