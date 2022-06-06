@@ -100,9 +100,9 @@ void AProjectPangeaCharacter::SetupPlayerInputComponent(class UInputComponent* P
   // We have 2 versions of the rotation bindings to handle different kinds of devices differently
   // "turn" handles devices that provide an absolute delta, such as a mouse.
   // "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-  PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+  PlayerInputComponent->BindAxis("Turn", this, &AProjectPangeaCharacter::TryTurn);
   PlayerInputComponent->BindAxis("TurnRate", this, &AProjectPangeaCharacter::TurnAtRate);
-  PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+  PlayerInputComponent->BindAxis("LookUp", this, &AProjectPangeaCharacter::TryLookUp);
   PlayerInputComponent->BindAxis("LookUpRate", this, &AProjectPangeaCharacter::LookUpAtRate);
 
   // handle touch devices
@@ -127,6 +127,8 @@ void AProjectPangeaCharacter::SetupPlayerInputComponent(class UInputComponent* P
 
   PlayerInputComponent->BindAction("TestSave", IE_Pressed, this, &AProjectPangeaCharacter::TestSave);
   PlayerInputComponent->BindAction("TestLoad", IE_Pressed, this, &AProjectPangeaCharacter::TestLoad);
+
+  PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AProjectPangeaCharacter::OnInteract);
 
 }
 
@@ -303,4 +305,26 @@ void AProjectPangeaCharacter::TestSave() {
 void AProjectPangeaCharacter::TestLoad() {
     // test loading chacter position
     TestWorldClass::testLoad(this);
+}
+
+void AProjectPangeaCharacter::OnInteract_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Yellow, "Interaction not handled by Blueprint");
+}
+
+void AProjectPangeaCharacter::AllowMouseLook(const bool newAllow)
+{
+	bAllowMouseLookAndTurn = newAllow;
+}
+
+void AProjectPangeaCharacter::TryTurn(float Rate)
+{
+	if (bAllowMouseLookAndTurn)
+		AddControllerYawInput(Rate);
+}
+
+void AProjectPangeaCharacter::TryLookUp(float Rate)
+{
+	if (bAllowMouseLookAndTurn)
+		AddControllerPitchInput(Rate);
 }

@@ -169,9 +169,25 @@ protected:
 
   UFUNCTION()
     void Zoom(float value);
+
+  UFUNCTION(BlueprintNativeEvent, Category = "Interaction")
+	void OnInteract();
+
+  UFUNCTION(BlueprintCallable, Category = "Interaction")
+	void AllowMouseLook(const bool newAllow);
+
+  UFUNCTION()
+	  void TryTurn(float Val);
+
+  UFUNCTION()
+	  void TryLookUp(float Val);
+
+  //void OnInteract_Implementation();
+
 private:
 
   bool dead;
+  bool bAllowMouseLookAndTurn;
 
 protected:
 	// APawn interface
